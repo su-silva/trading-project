@@ -17,14 +17,11 @@ ticks = []
 print("Escuchando ticks...")
 
 for mensaje in consumer:
-
     tick = mensaje.value
-
     ticks.append(tick)
 
     if len(ticks) == 10:
-
-        precios = [tick["bid"] for tick in ticks]
+        precios = [tick["bid"] for t in ticks]
 
         vela = {
             "symbol": "EURUSD",
@@ -35,6 +32,9 @@ for mensaje in consumer:
             "close": precios[-1],
             "num_ticks": len(precios)
         }
+
+        producer.send("velas", vela)
+        producer.flush()
 
         print("\nVela generada:")
         print(vela)
