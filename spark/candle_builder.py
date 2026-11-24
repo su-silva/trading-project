@@ -1,4 +1,4 @@
-from kafka import KafkaConsumer
+from kafka import KafkaConsumer, KafkaProducer
 import json
 
 consumer = KafkaConsumer(
@@ -7,9 +7,14 @@ consumer = KafkaConsumer(
     value_deserializer=lambda m: json.loads(m.decode("utf-8"))
 )
 
+producer = KafkaProducer(
+    bootstrap_servers="localhost:9092",
+    value_serializer=lambda v: json.dumps(v).encode("utf-8")
+)
+
 ticks = []
 
-print("Escuchando ticks")
+print("Escuchando ticks...")
 
 for mensaje in consumer:
 
@@ -23,7 +28,7 @@ for mensaje in consumer:
 
         vela = {
             "symbol": "EURUSD",
-	    "start": ticks[0]["timestamp"],
+            "inicio": ticks[0]["timestamp"],
             "open": precios[0],
             "high": max(precios),
             "low": min(precios),
