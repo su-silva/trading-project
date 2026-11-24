@@ -21,12 +21,16 @@ for mensaje in consumer:
 
         precios = [tick["bid"] for tick in ticks]
 
-        print("\nVela temporal:")
+        vela = {
+            "symbol": "EURUSD",
+            "open": precios[0],
+            "high": max(precios),
+            "low": min(precios),
+            "close": precios[-1],
+            "num_ticks": len(precios)
+        }
 
-        print("Open:", precios[0])
-        print("High:", max(precios))
-        print("Low:", min(precios))
-        print("Close:", precios[-1])
-        print("num_ticks:", len(precios))
+        print("\nVela generada:")
+        print(vela)
 
         ticks.clear()
