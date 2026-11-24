@@ -9,7 +9,7 @@ consumer = KafkaConsumer(
 
 ticks = []
 
-print("Escuchando ticks...")
+print("Escuchando ticks")
 
 for mensaje in consumer:
 
@@ -23,6 +23,7 @@ for mensaje in consumer:
 
         vela = {
             "symbol": "EURUSD",
+	    "start": ticks[0]["timestamp"],
             "open": precios[0],
             "high": max(precios),
             "low": min(precios),
