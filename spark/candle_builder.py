@@ -17,4 +17,11 @@ for mensaje in consumer:
 
     ticks.append(tick)
 
-    print(f"Ticks acumulados: {len(ticks)}")
+    if len(ticks) == 10:
+
+        print("\nVela temporal:")
+
+        print("Open:", ticks[0]["bid"])
+        print("Close:", ticks[-1]["bid"])
+
+        ticks.clear()
