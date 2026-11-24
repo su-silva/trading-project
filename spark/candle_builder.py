@@ -18,15 +18,15 @@ for mensaje in consumer:
     ticks.append(tick)
 
     if len(ticks) == 10:
-	
-	precios = [tick["bid"] for tick in ticks]
+
+        precios = [tick["bid"] for tick in ticks]
 
         print("\nVela temporal:")
 
         print("Open:", precios[0])
-	print("High:", max(precios))
-	print("Low:", min(precios))
+        print("High:", max(precios))
+        print("Low:", min(precios))
         print("Close:", precios[-1])
-	print("num_ticks:", len(precios))
+        print("num_ticks:", len(precios))
 
         ticks.clear()
